@@ -1,0 +1,471 @@
+[gd_scene format=3 uid="uid://c013abe24htx5"]
+
+[ext_resource type="Script" uid="uid://b5164jastfllt" path="res://Levels/level.gd" id="1_gtnvv"]
+[ext_resource type="Texture2D" uid="uid://bxifwyjy5pyu8" path="res://Assets/TestTexture/Dark/texture_09.png" id="1_s41d2"]
+[ext_resource type="PackedScene" uid="uid://cv6ltd7ehllki" path="res://Platformer/death_zone.tscn" id="3_wav5q"]
+[ext_resource type="PackedScene" uid="uid://bfi65r7du3o3b" path="res://Player/player.tscn" id="4_uhyyw"]
+[ext_resource type="PackedScene" uid="uid://bp62acvio3oqc" path="res://Platformer/jump_platform.tscn" id="5_t80w2"]
+[ext_resource type="PackedScene" uid="uid://dusy3ejppiapg" path="res://Platformer/coin.tscn" id="6_t80w2"]
+[ext_resource type="Texture2D" uid="uid://ciuvq0ph5reh5" path="res://Assets/Partickles/scorch_03.png" id="7_8a2b0"]
+[ext_resource type="Texture2D" uid="uid://c84eok4d8edkj" path="res://Assets/Partickles/magic_03.png" id="8_ecu0b"]
+[ext_resource type="Texture2D" uid="uid://d24qpfhubsg53" path="res://Assets/Partickles/trace_01.png" id="9_t2u7g"]
+[ext_resource type="PackedScene" uid="uid://c6oc01gtgie25" path="res://Platformer/bomb.tscn" id="10_vx8ih"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_uhyyw"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_t80w2"]
+sky_material = SubResource("ProceduralSkyMaterial_uhyyw")
+
+[sub_resource type="Environment" id="Environment_8a2b0"]
+background_mode = 2
+sky = SubResource("Sky_t80w2")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gtnvv"]
+albedo_texture = ExtResource("1_s41d2")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ecu0b"]
+transparency = 1
+blend_mode = 1
+cull_mode = 2
+shading_mode = 0
+vertex_color_use_as_albedo = true
+vertex_color_is_srgb = true
+albedo_texture = ExtResource("7_8a2b0")
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+stencil_flags = 2
+
+[sub_resource type="Curve" id="Curve_t2u7g"]
+_limits = [-1.0, 1.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, -1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_uoblx"]
+curve = SubResource("Curve_t2u7g")
+
+[sub_resource type="Curve" id="Curve_vx8ih"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.1957233, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_edwec"]
+curve = SubResource("Curve_vx8ih")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ugh17"]
+lifetime_randomness = 0.2
+angle_min = -44.99999
+angle_max = 45.00001
+angle_curve = SubResource("CurveTexture_uoblx")
+gravity = Vector3(0, 2.5, 0)
+linear_accel_min = 1.9999977
+linear_accel_max = 4.9999976
+damping_min = 0.1
+damping_max = 1.0
+scale_max = 1.5
+scale_curve = SubResource("CurveTexture_edwec")
+color = Color(1, 0.6666667, 0, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_eabcg"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t2u7g"]
+transparency = 1
+blend_mode = 1
+cull_mode = 2
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("8_ecu0b")
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_ugh17"]
+_limits = [-1.0, 1.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, -1), -3.5017097, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_eabcg"]
+curve = SubResource("Curve_ugh17")
+
+[sub_resource type="Curve" id="Curve_ecu0b"]
+_limits = [-1.0, 1.0, 0.0, 1.0]
+_data = [Vector2(0, 1.4901161e-08), 0.0, 0.0, 0, 0, Vector2(1, 1), 3.1460674, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_t2u7g"]
+curve = SubResource("Curve_ecu0b")
+
+[sub_resource type="Curve" id="Curve_dvejp"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -1.4541824, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_3hgmi"]
+curve = SubResource("Curve_dvejp")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_xsqsu"]
+emission_shape_scale = Vector3(1, 1.15, 1)
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 0.0
+emission_ring_radius = 2.0
+emission_ring_inner_radius = 1.75
+emission_ring_cone_angle = 90.0
+angle_min = -179.99998
+angle_max = 180.00002
+angle_curve = SubResource("CurveTexture_eabcg")
+orbit_velocity_min = 9.49949e-08
+orbit_velocity_max = 0.3000001
+orbit_velocity_curve = SubResource("CurveTexture_t2u7g")
+gravity = Vector3(0, 0, 0)
+linear_accel_min = 0.19999775
+linear_accel_max = 0.49999776
+radial_accel_min = -1.5000021
+radial_accel_max = -2.2351742e-06
+tangential_accel_min = -0.20000224
+tangential_accel_max = 0.19999775
+scale_min = 0.5
+scale_max = 0.79999995
+scale_curve = SubResource("CurveTexture_3hgmi")
+color = Color(1.8247963, 0.9443788, 0, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_vmy0u"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vx8ih"]
+transparency = 1
+blend_mode = 1
+cull_mode = 2
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("9_t2u7g")
+billboard_mode = 2
+billboard_keep_scale = true
+
+[sub_resource type="Curve" id="Curve_eabcg"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -1.2584275, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_dvejp"]
+curve = SubResource("Curve_eabcg")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_3hgmi"]
+lifetime_randomness = 0.3
+emission_shape = 3
+emission_box_extents = Vector3(10, 0.1, 10)
+gravity = Vector3(0, -15, 0)
+scale_curve = SubResource("CurveTexture_dvejp")
+color = Color(0, 0.8572726, 1.6852883, 1)
+collision_mode = 1
+collision_friction = 1.0
+collision_bounce = 0.2
+
+[sub_resource type="QuadMesh" id="QuadMesh_xsqsu"]
+
+[sub_resource type="Curve" id="Curve_3hgmi"]
+_limits = [-1.0, 1.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, -1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_xsqsu"]
+curve = SubResource("Curve_3hgmi")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_t2u7g"]
+emission_shape = 3
+emission_box_extents = Vector3(5, 0.1, 5)
+direction = Vector3(0, 0, 0)
+initial_velocity_min = 1.0
+initial_velocity_max = 2.0
+orbit_velocity_min = 9.49949e-08
+orbit_velocity_max = 0.1000001
+orbit_velocity_curve = SubResource("CurveTexture_xsqsu")
+color = Color(0.49862415, 0, 2.6034334, 1)
+hue_variation_min = -0.52000004
+hue_variation_max = 0.23999996
+
+[sub_resource type="Curve" id="Curve_vmy0u"]
+_data = [Vector2(0, 1), 0.0, -0.99685514, 0, 0, Vector2(1, 0), -1.0636686, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ugh17"]
+transparency = 1
+cull_mode = 2
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_color = Color(4.0059752, 4.0059752, 4.0059752, 1)
+use_particle_trails = true
+
+[sub_resource type="RibbonTrailMesh" id="RibbonTrailMesh_t2u7g"]
+material = SubResource("StandardMaterial3D_ugh17")
+shape = 0
+size = 0.05
+curve = SubResource("Curve_vmy0u")
+
+[sub_resource type="Animation" id="Animation_t2u7g"]
+resource_name = "CutScene"
+length = 8.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Camera3D:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2, 4, 6, 8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 5, 10), Vector3(-8.449, 5, 0), Vector3(0, 2, -8.5), Vector3(8.5, 2, 0), Vector3(0, 5, 10)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Camera3D:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1, 2, 3, 4, 5, 6, 7, 8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.61086524, 0, 0), Vector3(0, 0.61086524, 0), Vector3(0, 0, 0), Vector3(0, -0.34906584, 0), Vector3(0, -1.5707964, 0), Vector3(0, -2.0943952, 0), Vector3(0, -3.1415927, 0), Vector3(0, 2.1816616, 0), Vector3(-0.61086524, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("door/Node3D2:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(3, 3.25, 3.75, 4.5, 5.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0.7853982, 0), Vector3(0, 1.5707964, 0), Vector3(0, 1.5707964, 0), Vector3(0, 0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("door/Node3D3:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(3, 3.25, 3.75, 4.5, 5.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, -3.1415925, 0), Vector3(0, -3.9269907, 0), Vector3(0, -4.712389, 0), Vector3(0, -4.712389, 0), Vector3(0, -3.1415927, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_vx8ih"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Camera3D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.6981317, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Camera3D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-8.449, 5, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("door/Node3D2:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.7853982, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("door/Node3D3:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, -3.9269907, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ugh17"]
+_data = {
+&"CutScene": SubResource("Animation_t2u7g"),
+&"RESET": SubResource("Animation_vx8ih")
+}
+
+[node name="Level" type="Node3D" unique_id=676814906]
+script = ExtResource("1_gtnvv")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=204153016]
+environment = SubResource("Environment_8a2b0")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1228565012]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=157278532]
+material_override = SubResource("StandardMaterial3D_gtnvv")
+use_collision = true
+size = Vector3(25, 0.1, 25)
+
+[node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="." unique_id=2002630856]
+size = Vector3(25, 0.1, 25)
+
+[node name="Player" parent="." unique_id=2084436118 instance=ExtResource("4_uhyyw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.084318936, 0)
+
+[node name="JumpPlatform" parent="." unique_id=992447932 instance=ExtResource("5_t80w2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.563445, 0.16699374, 0.11625481)
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=907612225]
+transform = Transform3D(0.76604444, 0, 0.6427876, 0, 1, 0, -0.6427876, 0, 0.76604444, -8.449, 5, 0)
+
+[node name="DeathZone" parent="." unique_id=88300975 instance=ExtResource("3_wav5q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.1018057, 0)
+
+[node name="Coin" parent="." unique_id=1222579180 instance=ExtResource("6_t80w2")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -0.32703578, 0.44365954, 4.361737)
+
+[node name="Coin2" parent="." unique_id=327984323 instance=ExtResource("6_t80w2")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0.62655294, 0.44365954, 4.3249407)
+
+[node name="Coin3" parent="." unique_id=1076157528 instance=ExtResource("6_t80w2")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0.6188282, 0.44365954, 5.9978266)
+
+[node name="Coin4" parent="." unique_id=772115748 instance=ExtResource("6_t80w2")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -0.71116006, 0.44365954, 6.0116987)
+
+[node name="Coin5" parent="." unique_id=348820652 instance=ExtResource("6_t80w2")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -1.9702519, 0.44365954, 4.097758)
+
+[node name="Coin6" parent="." unique_id=1638181290 instance=ExtResource("6_t80w2")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -0.68187463, 0.44365954, 2.9543529)
+
+[node name="Coin7" parent="." unique_id=257902797 instance=ExtResource("6_t80w2")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0.9535438, 0.44365954, 2.6383348)
+
+[node name="Coin8" parent="." unique_id=946946370 instance=ExtResource("6_t80w2")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 1.4419729, 0.44365954, 4.5706997)
+
+[node name="Coin9" parent="." unique_id=1814975672 instance=ExtResource("6_t80w2")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 1.6630112, 0.44365954, 5.855723)
+
+[node name="Coin10" parent="." unique_id=1389744812 instance=ExtResource("6_t80w2")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 1.6630112, 0.44365954, 5.855723)
+
+[node name="Fire" type="Node3D" parent="." unique_id=1571820255]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.3156168, 0, 2.6172678)
+
+[node name="F" type="GPUParticles3D" parent="Fire" unique_id=374011911]
+material_override = SubResource("StandardMaterial3D_ecu0b")
+amount = 32
+speed_scale = 1.1
+randomness = 0.5
+process_material = SubResource("ParticleProcessMaterial_ugh17")
+draw_pass_1 = SubResource("QuadMesh_eabcg")
+
+[node name="Portal" type="Node3D" parent="." unique_id=1245909229]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.8895564, 2.4459963, -4.7683716e-07)
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Portal" unique_id=1543064360]
+material_override = SubResource("StandardMaterial3D_t2u7g")
+amount = 256
+lifetime = 1.5
+speed_scale = 1.5
+process_material = SubResource("ParticleProcessMaterial_xsqsu")
+draw_pass_1 = SubResource("QuadMesh_vmy0u")
+
+[node name="Rain" type="Node3D" parent="." unique_id=1275172065]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.649252, 2.1443226, 0)
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Rain" unique_id=1079373868]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0604072, 0)
+material_override = SubResource("StandardMaterial3D_vx8ih")
+amount = 128
+process_material = SubResource("ParticleProcessMaterial_3hgmi")
+draw_pass_1 = SubResource("QuadMesh_xsqsu")
+
+[node name="Stars" type="Node3D" parent="." unique_id=2117538656]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.333071, 5.857052, -4.7683716e-07)
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Stars" unique_id=387768382]
+amount = 128
+lifetime = 5.0
+randomness = 1.0
+trail_enabled = true
+trail_lifetime = 1.0
+process_material = SubResource("ParticleProcessMaterial_t2u7g")
+draw_pass_1 = SubResource("RibbonTrailMesh_t2u7g")
+
+[node name="Cutscene" type="Node3D" parent="." unique_id=2130351756]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Cutscene" unique_id=1283000647]
+libraries/ = SubResource("AnimationLibrary_ugh17")
+
+[node name="CamPos" type="Node3D" parent="Cutscene" unique_id=380070239]
+
+[node name="POSMarker3D" type="Marker3D" parent="Cutscene/CamPos" unique_id=3151521]
+transform = Transform3D(1, 0, 0, 0, 0.81915206, 0.57357645, 0, -0.57357645, 0.81915206, 0, 5, 10)
+gizmo_extents = 3.0
+
+[node name="POSMarker3D2" type="Marker3D" parent="Cutscene/CamPos" unique_id=1309882960]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.449, 5, 0)
+gizmo_extents = 3.0
+
+[node name="POSMarker3D3" type="Marker3D" parent="Cutscene/CamPos" unique_id=695530043]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 2, -8.5)
+gizmo_extents = 3.0
+
+[node name="POSMarker3D4" type="Marker3D" parent="Cutscene/CamPos" unique_id=2133800851]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 8.5, 2, 0)
+gizmo_extents = 3.0
+
+[node name="door" type="Node3D" parent="Cutscene" unique_id=792693540]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7385938, -7.990322)
+
+[node name="Node3D2" type="Node3D" parent="Cutscene/door" unique_id=1537388231]
+transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, 0, 0, -3.007)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Cutscene/door/Node3D2" unique_id=187333639]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 1.2669115)
+size = Vector3(2.5, 4.151, 0.466)
+
+[node name="Node3D3" type="Node3D" parent="Cutscene/door" unique_id=2037737794]
+transform = Transform3D(-0.7071068, 0, 0.7071067, 0, 1, 0, -0.7071067, 0, -0.7071068, 0, 0, 1.993)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Cutscene/door/Node3D3" unique_id=1318582656]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 1.2669115)
+size = Vector3(2.5, 4.151, 0.466)
+
+[node name="Bomb" parent="." unique_id=607826886 instance=ExtResource("10_vx8ih")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.7360055, 0.35420284, 6.133052)
+
+[node name="Bomb2" parent="." unique_id=877806087 instance=ExtResource("10_vx8ih")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.3419294, 0.35420272, 4.106907)
+
+[node name="Bomb3" parent="." unique_id=1895954608 instance=ExtResource("10_vx8ih")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.402664, 0.35420284, 6.332474)
+
+[connection signal="animation_finished" from="Cutscene/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

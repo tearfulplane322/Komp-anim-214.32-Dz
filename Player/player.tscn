@@ -1,0 +1,248 @@
+[gd_scene format=3 uid="uid://bfi65r7du3o3b"]
+
+[ext_resource type="Script" uid="uid://cjbcwpqw8b5po" path="res://Player/player.gd" id="1_l8h54"]
+[ext_resource type="Script" uid="uid://b76fllghu8vyh" path="res://Player/hud.gd" id="2_btcbx"]
+[ext_resource type="PackedScene" uid="uid://dld3elo1vnlrn" path="res://Assets/Character_Animation/Character/source/Untitled.fbx" id="4_gwnis"]
+[ext_resource type="Texture2D" uid="uid://cwddv5i0xenpk" path="res://Assets/Character_Animation/Character/textures/T_actor_zhaungfy_body_01_D.png" id="5_00tjw"]
+[ext_resource type="AnimationLibrary" uid="uid://cfjj6nsxy5jsr" path="res://Assets/Character_Animation/Anim/animlib.res" id="5_k53q1"]
+[ext_resource type="Texture2D" uid="uid://dnexquae3mmqt" path="res://Assets/Character_Animation/Character/textures/T_actor_zhuangfy_cloth_01_D.png" id="6_x3vf3"]
+[ext_resource type="Texture2D" uid="uid://cbjqp6ue1l6c1" path="res://Assets/Character_Animation/Character/textures/T_actor_zhuangfy_face_01_D.png" id="7_apopc"]
+[ext_resource type="Texture2D" uid="uid://vdgvi3tvvfj4" path="res://Assets/Character_Animation/Character/textures/T_actor_zhuangfy_hair_01_D.png" id="8_5htga"]
+[ext_resource type="Texture2D" uid="uid://brftm8i6vt5ha" path="res://Assets/Character_Animation/Character/textures/T_actor_zhuangfy_iris_01_D.png" id="9_p5o4e"]
+[ext_resource type="Texture2D" uid="uid://b1koy1aaaf82n" path="res://Assets/PNGeshiki/free-icon-hearts-138533.png" id="10_x3vf3"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_x3vf3"]
+radius = 0.4
+height = 2.125
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x3vf3"]
+albedo_texture = ExtResource("5_00tjw")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_apopc"]
+albedo_texture = ExtResource("6_x3vf3")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5htga"]
+albedo_texture = ExtResource("7_apopc")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p5o4e"]
+albedo_texture = ExtResource("8_5htga")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gu6f8"]
+albedo_texture = ExtResource("9_p5o4e")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dkpta"]
+albedo_texture = ExtResource("7_apopc")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lfmf2"]
+albedo_texture = ExtResource("7_apopc")
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_x3vf3"]
+fadein_time = 0.2
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_5htga"]
+fadein_time = 0.3
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_dkpta"]
+animation = &"animlib/death"
+
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_x3vf3"]
+xfade_time = 0.3
+input_0/name = "Idle"
+input_0/auto_advance = false
+input_0/break_loop_at_end = false
+input_0/reset = true
+input_1/name = "Run"
+input_1/auto_advance = false
+input_1/break_loop_at_end = false
+input_1/reset = true
+input_2/name = "Jump"
+input_2/auto_advance = false
+input_2/break_loop_at_end = false
+input_2/reset = true
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_apopc"]
+fadein_time = 0.3
+fadeout_time = 0.3
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_p5o4e"]
+animation = &"animlib/HipHopDance"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_apopc"]
+animation = &"animlib/idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_gu6f8"]
+animation = &"animlib/jump"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5htga"]
+animation = &"animlib/run"
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_p5o4e"]
+graph_offset = Vector2(-240.48822, -52.1678)
+nodes/output/position = Vector2(1320, 100)
+nodes/idle/node = SubResource("AnimationNodeAnimation_apopc")
+nodes/idle/position = Vector2(-380, 20)
+nodes/Movement/node = SubResource("AnimationNodeTransition_x3vf3")
+nodes/Movement/position = Vector2(-140, 60)
+nodes/run/node = SubResource("AnimationNodeAnimation_5htga")
+nodes/run/position = Vector2(-380, 200)
+nodes/DANCE/node = SubResource("AnimationNodeOneShot_x3vf3")
+nodes/DANCE/position = Vector2(1020, 0)
+nodes/dance/node = SubResource("AnimationNodeAnimation_p5o4e")
+nodes/dance/position = Vector2(760, 340)
+nodes/jump/node = SubResource("AnimationNodeAnimation_gu6f8")
+nodes/jump/position = Vector2(-160, 340)
+nodes/OneShot/node = SubResource("AnimationNodeOneShot_apopc")
+nodes/OneShot/position = Vector2(100, 40)
+nodes/Dead/node = SubResource("AnimationNodeOneShot_5htga")
+nodes/Dead/position = Vector2(460, 40)
+nodes/Death/node = SubResource("AnimationNodeAnimation_dkpta")
+nodes/Death/position = Vector2(220, 380)
+node_connections = [&"output", 0, &"DANCE", &"Movement", 0, &"idle", &"Movement", 1, &"run", &"DANCE", 0, &"Dead", &"DANCE", 1, &"dance", &"OneShot", 0, &"Movement", &"OneShot", 1, &"jump", &"Dead", 0, &"OneShot", &"Dead", 1, &"Death"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_4ntmi"]
+font_size = 32
+font_color = Color(1, 1, 0, 1)
+
+[node name="Player" type="CharacterBody3D" unique_id=2084436118]
+collision_layer = 2
+collision_mask = 5
+script = ExtResource("1_l8h54")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1956310299]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 0)
+shape = SubResource("CapsuleShape3D_x3vf3")
+
+[node name="Body" type="Node3D" parent="." unique_id=1602067926]
+transform = Transform3D(1.25, 0, 0, 0, 1.25, 0, 0, 0, 1.25, 0, 0, 0)
+
+[node name="Untitled" parent="Body" unique_id=1128295735 instance=ExtResource("4_gwnis")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+
+[node name="GeneralSkeleton" parent="Body/Untitled/Armature" parent_id_path=PackedInt32Array(1128295735, 83816694) index="0" unique_id=245721585]
+bones/0/position = Vector3(0.005081658, 0.86764795, -0.004691043)
+bones/0/rotation = Quaternion(0.16243574, -0.038069397, 0.022408422, 0.9857298)
+bones/1/rotation = Quaternion(0.06381823, 0.39694092, 0.91561353, 0.004150418)
+bones/2/rotation = Quaternion(0.035036374, 0.6438345, -0.7631321, -0.043348417)
+bones/3/rotation = Quaternion(0.09518947, 0.77856094, -0.6169655, 0.06430739)
+bones/4/rotation = Quaternion(-1.1623183e-08, 0.99914485, -0.041348957, 6.2902226e-09)
+bones/21/rotation = Quaternion(-0.021434583, 0.5228413, 0.8510058, -0.04434733)
+bones/22/rotation = Quaternion(-0.0051032687, 0.8070185, -0.5899665, -0.025192283)
+bones/23/rotation = Quaternion(-0.047085684, 0.5117107, -0.8555899, 0.062457558)
+bones/24/rotation = Quaternion(1.1926561e-08, 1, 3.439856e-07, -9.055302e-09)
+bones/47/rotation = Quaternion(0.036379967, -0.0037515266, 0.0098891705, 0.99928206)
+bones/48/rotation = Quaternion(0.026018687, 0.005876857, 0.01819991, 0.9994785)
+bones/49/rotation = Quaternion(0.025328007, 0.0062449197, 0.018614614, 0.99948645)
+bones/50/rotation = Quaternion(-0.06923607, 0.002848199, 0.0143345725, 0.99749327)
+bones/51/rotation = Quaternion(-0.08641964, 0.04219069, -0.055655234, 0.9938079)
+bones/195/rotation = Quaternion(0.4802123, 0.49034888, 0.6177054, -0.38391972)
+bones/196/rotation = Quaternion(0.09062605, 0.87517583, -0.4612792, -0.114348516)
+bones/198/rotation = Quaternion(0.36660773, -0.60464764, 0.36660784, 0.60464764)
+bones/200/rotation = Quaternion(0.10822736, 0.60725385, 0.1415985, 0.77426064)
+bones/201/rotation = Quaternion(-0.30087593, 0.66891855, 0.14878067, 0.66323906)
+bones/202/rotation = Quaternion(0.18252796, 0.11323546, 0.017963199, 0.976493)
+bones/203/rotation = Quaternion(-0.04529474, -0.029637847, -0.13290171, 0.98965)
+bones/204/rotation = Quaternion(0.60647285, -0.031130869, 0.011313845, 0.7944139)
+bones/205/rotation = Quaternion(0.4329212, -1.7119815e-08, -0.044364225, 0.90033937)
+bones/206/rotation = Quaternion(0.37788242, 9.827847e-09, -0.038724303, 0.92504346)
+bones/207/rotation = Quaternion(0.6194354, -0.021077778, -0.06897101, 0.7817279)
+bones/208/rotation = Quaternion(0.44933093, -3.2341166e-08, -0.04604599, 0.892178)
+bones/209/rotation = Quaternion(0.39299148, -1.5220815e-08, -0.04027256, 0.9186598)
+bones/210/rotation = Quaternion(0.63073605, 0.0022938726, -0.09903594, 0.76964843)
+bones/211/rotation = Quaternion(0.4712757, 1.5982106e-10, -0.04829479, 0.8806628)
+bones/212/rotation = Quaternion(0.40518102, -8.972652e-08, -0.04152166, 0.91329306)
+bones/213/rotation = Quaternion(0.65231335, 0.012040272, -0.2057142, 0.7293998)
+bones/214/rotation = Quaternion(0.48324585, 9.3842786e-08, -0.04952151, 0.87408304)
+bones/215/rotation = Quaternion(0.4227649, -5.073569e-09, -0.043323524, 0.90520334)
+bones/224/rotation = Quaternion(0.5042189, -0.48502535, -0.55557626, -0.44927597)
+bones/225/rotation = Quaternion(-0.120558545, 0.8954216, -0.3856751, 0.18692401)
+bones/227/rotation = Quaternion(0.38592336, 0.5925059, -0.3859236, 0.59250575)
+bones/229/rotation = Quaternion(0.0058689713, -0.60506874, -0.10821692, 0.7887626)
+bones/230/rotation = Quaternion(-0.24642812, -0.6791123, -0.19637285, 0.6629611)
+bones/231/rotation = Quaternion(0.1909264, -0.11400522, -0.014691619, 0.9748509)
+bones/232/rotation = Quaternion(0.050841644, -0.036166362, 0.13004978, 0.9895425)
+bones/233/rotation = Quaternion(0.5132483, 0.008460077, 0.029032227, 0.85770726)
+bones/234/rotation = Quaternion(0.4345876, -4.1148187e-09, 0.035402518, 0.89993346)
+bones/235/rotation = Quaternion(0.4041165, -1.4262193e-08, 0.032920178, 0.914115)
+bones/236/rotation = Quaternion(0.5395898, 0.007343913, 0.06560406, 0.83933604)
+bones/237/rotation = Quaternion(0.29565343, -1.1449226e-07, 0.024084589, 0.9549917)
+bones/238/rotation = Quaternion(0.26271996, 1.4903597e-08, 0.02140176, 0.96463484)
+bones/239/rotation = Quaternion(0.56528544, -0.0077430275, 0.08961377, 0.8199767)
+bones/240/rotation = Quaternion(0.49574444, -2.9163372e-08, 0.040384598, 0.86752903)
+bones/241/rotation = Quaternion(0.45903003, 7.0692316e-08, 0.037393745, 0.8876335)
+bones/242/rotation = Quaternion(0.5531881, 0.00048140675, 0.14972095, 0.8194915)
+bones/243/rotation = Quaternion(0.5156309, 7.528544e-08, 0.042004425, 0.85578066)
+bones/244/rotation = Quaternion(0.4829203, 4.9619217e-08, 0.039339855, 0.8747802)
+
+[node name="Body" parent="Body/Untitled/Armature/GeneralSkeleton" index="0" unique_id=909285681]
+surface_material_override/0 = SubResource("StandardMaterial3D_x3vf3")
+surface_material_override/1 = SubResource("StandardMaterial3D_apopc")
+surface_material_override/2 = SubResource("StandardMaterial3D_5htga")
+surface_material_override/3 = SubResource("StandardMaterial3D_p5o4e")
+surface_material_override/4 = SubResource("StandardMaterial3D_gu6f8")
+surface_material_override/5 = SubResource("StandardMaterial3D_dkpta")
+surface_material_override/6 = SubResource("StandardMaterial3D_lfmf2")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Body/Untitled" unique_id=2028804104]
+libraries/animlib = ExtResource("5_k53q1")
+autoplay = &"animlib/idle"
+
+[node name="AnimationTree" type="AnimationTree" parent="Body/Untitled" unique_id=1507586825]
+tree_root = SubResource("AnimationNodeBlendTree_p5o4e")
+anim_player = NodePath("../AnimationPlayer")
+parameters/Movement/current_state = "Run"
+parameters/Movement/transition_request = ""
+parameters/Movement/current_index = 1
+parameters/DANCE/active = false
+parameters/DANCE/internal_active = false
+parameters/DANCE/request = 0
+parameters/OneShot/active = false
+parameters/OneShot/internal_active = false
+parameters/OneShot/request = 0
+parameters/Dead/active = false
+parameters/Dead/internal_active = false
+parameters/Dead/request = 0
+
+[node name="Hud" type="Control" parent="." unique_id=103368515]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_btcbx")
+
+[node name="HP" type="HBoxContainer" parent="Hud" unique_id=380862732]
+layout_mode = 1
+offset_left = 25.0
+offset_top = 25.0
+offset_right = 1569.0
+offset_bottom = 537.0
+scale = Vector2(0.15, 0.15)
+
+[node name="TextureRect" type="TextureRect" parent="Hud/HP" unique_id=87275619]
+layout_mode = 2
+texture = ExtResource("10_x3vf3")
+
+[node name="TextureRect2" type="TextureRect" parent="Hud/HP" unique_id=490803503]
+layout_mode = 2
+texture = ExtResource("10_x3vf3")
+
+[node name="TextureRect3" type="TextureRect" parent="Hud/HP" unique_id=2052893765]
+layout_mode = 2
+texture = ExtResource("10_x3vf3")
+
+[node name="Coin" type="Label" parent="Hud" unique_id=1655947000]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.022000002
+anchor_top = 0.1911173
+anchor_right = 0.14454167
+anchor_bottom = 0.2643703
+offset_left = -0.34400177
+offset_top = 0.1559906
+offset_right = 0.48799896
+offset_bottom = -0.1719513
+label_settings = SubResource("LabelSettings_4ntmi")
+metadata/_edit_use_anchors_ = true
+
+[editable path="Body/Untitled"]
